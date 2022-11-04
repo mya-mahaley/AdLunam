@@ -1,4 +1,4 @@
-package com.example.adlunam.ui.notifications
+package com.example.adlunam.ui.trivia
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.adlunam.databinding.FragmentNotificationsBinding
 
-class NotificationsFragment : Fragment() {
+class TriviaFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
 
@@ -22,14 +22,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val triviaViewModel =
+            ViewModelProvider(this).get(TriviaViewModel::class.java)
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        triviaViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
