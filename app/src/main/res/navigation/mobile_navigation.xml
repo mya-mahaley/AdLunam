@@ -13,8 +13,8 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.adlunam.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:name="com.example.adlunam.ui.images.ImagesFragment"
+        android:label="@string/title_images"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
