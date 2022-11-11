@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Without a layout object, Android will insert a
-default layout with wrap_content width that after
-scrolling gets corrected to match_parent -->
+
 <LinearLayout
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_margin="4dp"
+    android:layout_margin="0dp"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="8dp"
-        card_view:cardMaxElevation="2dp"
-        card_view:cardElevation="1dp"
-        android:layout_gravity="center"
-        card_view:cardBackgroundColor="#FFFFFFFF">
+        android:orientation="horizontal">
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_bar"
+            android:layout_weight="2"
+            android:hint="Search">
+        </EditText>
+
+    </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/recyclerView"
             android:scrollbars="vertical" />
 
-    </androidx.cardview.widget.CardView>
+        <!--</androidx.cardview.widget.CardView>-->
+    <!--- </androidx.swiperefreshlayout.widget.SwipeRefreshLayout> -->
 </LinearLayout>

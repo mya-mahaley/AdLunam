@@ -45,7 +45,16 @@ class ImagesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView: RecyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = ImageAdapter(viewModel)
+        val adapter = ImageAdapter(viewModel)
+        recyclerView.adapter = adapter
+
+
+        /*viewModel.observeImages().observe(viewLifecycleOwner){
+            adapter.submitList(it)
+        }*/
+
+        adapter.submitList(viewModel.images)
+
     }
 
     override fun onDestroyView() {
