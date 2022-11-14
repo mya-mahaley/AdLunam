@@ -4,19 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
-
+    tools:context=".ui.home.HomeFragment"
+    android:background="@color/black">
     <TextView
-        android:id="@+id/text_home"
+        android:id="@+id/welcome_text"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:text="Welcome to Ad Lunam"
         android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/material_dynamic_secondary50"
+        android:textSize="35sp"
+        android:textStyle="bold|italic"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/moon_layout"
+        app:layout_constraintTop_toBottomOf="@id/welcome_text">
+
+        <LinearLayout
+            android:id="@+id/moon_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="username:"
+                android:textAlignment="textEnd"
+                android:textColor="@color/material_dynamic_secondary70"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Current Phase: Full Moon"
+                android:textAlignment="textEnd"
+                android:textColor="@color/material_dynamic_secondary70"
+                android:textSize="15sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" 116.41,39.92"
+                android:textAlignment="textEnd"
+                android:textColor="@color/material_dynamic_secondary70"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            app:layout_constraintStart_toEndOf="@id/moon_data"
+            app:layout_constraintTop_toBottomOf="@id/welcome_text"
+            android:id="@+id/moon_phase_image"
+            android:src="@drawable/full_moon"
+        />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/apotd_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="50dp"
+        android:text="Astronomy Picture of The Day"
+        android:textAlignment="center"
+        android:textColor="@color/material_dynamic_secondary50"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/moon_layout"/>
+
+    <ImageView
+        android:id="@+id/apotd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/material_dynamic_primary90"
+        android:src="@drawable/saturn_icon"
+        app:layout_constraintTop_toBottomOf="@id/apotd_header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="15dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
