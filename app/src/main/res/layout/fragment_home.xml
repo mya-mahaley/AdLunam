@@ -87,7 +87,7 @@
         android:textAlignment="center"
         android:textColor="@color/material_dynamic_secondary50"
         android:textSize="35sp"
-        android:textStyle="bold|italic"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/moon_layout"/>
 
     <ImageView
