@@ -79,26 +79,56 @@
         android:id="@+id/apotd_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="10dp"
         android:text="Astronomy Picture of The Day"
         android:textAlignment="center"
         android:textColor="@color/material_dynamic_secondary50"
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/moon_layout"/>
-
-    <ImageView
-        android:id="@+id/apotd"
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:background="@color/material_dynamic_primary90"
-        android:src="@drawable/saturn_icon"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardMaxElevation="2dp"
+        card_view:cardElevation="1dp"
+        android:layout_gravity="center"
+        card_view:cardBackgroundColor="#000000"
         app:layout_constraintTop_toBottomOf="@id/apotd_header"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="15dp" />
+        android:layout_margin="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/title"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/spaceImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="sans-serif-condensed" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

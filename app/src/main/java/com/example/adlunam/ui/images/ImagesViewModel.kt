@@ -7,10 +7,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.adlunam.OneImage
+import com.example.adlunam.api.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class ImagesViewModel : ViewModel() {
 
+    var fetchDone : MutableLiveData<Boolean> = MutableLiveData(false)
+    private val imagesApi = NasaImageApi.create()
+    private val imagesRepository = NasaImageRepository(imagesApi)
+    private val nasaImages = MutableLiveData<List<NasaImage>>()
     private val _text = MutableLiveData<String>().apply {
         value = "This is images Fragment"
     }
@@ -31,7 +38,19 @@ class ImagesViewModel : ViewModel() {
         images.add(ImageData("The Moon as seen by MESSENGER",
             "description",
             "https://images-assets.nasa.gov/image/PIA14114/PIA14114~thumb.jpg"))
+        //netRefresh()
     }
+
+    fun netRefresh() {
+        // XXX Write me.  This is where the network request is initiated.
+        fetchDone.value = false
+        viewModelScope.launch (
+            context = viewModelScope.coroutineContext +
+                    Dispatchers.IO) {
+            nasaImages.postValue(imagesRepository.fetchImages("moon"))
+        }
+    }
+
 
     // Observe searchTerm livedata
     //fun observeSearchTerm(): LiveData<String> { return searchTerm }

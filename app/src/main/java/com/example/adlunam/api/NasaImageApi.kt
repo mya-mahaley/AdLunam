@@ -12,6 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 import java.lang.reflect.Type
 
 
@@ -23,16 +24,17 @@ interface NasaImageApi {
     // @GET("/r/{subreddit}/")
     // suspend fun getPosts(@Path("subreddit") subreddit: String) : xxxxxx
     // The reddit api docs are here: https://www.reddit.com/dev/api/#GET_hot
-    @GET("/search?q={q}?media_type=image")
-    suspend fun getImages(@Path("q") q: String) : ListingResponse
+    @GET("/search?media_type=image")
+    suspend fun getImages(@Query("q") q: String) : ImageApiResponse
 
-    // https://www.reddit.com/dev/api/#listings
-    class ListingResponse(val data: ListingData)
+    data class ImageApiResponse(val collection: ImageCollection)
 
-    class ListingData(
-        val items: List<RedditChildrenResponse>,
+    class ImageCollection(
+        val items: List<ImageItemsResponse>
     )
-    data class ImageApiResponse(val data: NasaImage)
+
+    //need to change nasaImage class
+    data class ImageItemsResponse(val data: NasaImage)
 
     class SpannableDeserializer : JsonDeserializer<SpannableString> {
         // @Throws(JsonParseException::class)
@@ -57,7 +59,7 @@ interface NasaImageApi {
         //private const val BASE_URL = "https://images-api.nasa.gov/"
         var httpurl = HttpUrl.Builder()
             .scheme("https")
-            .host("www.images-api.nasa.gov")
+            .host("images-api.nasa.gov")
             .build()
         fun create(): NasaImageApi = create(httpurl)
         private fun create(httpUrl: HttpUrl): NasaImageApi {
