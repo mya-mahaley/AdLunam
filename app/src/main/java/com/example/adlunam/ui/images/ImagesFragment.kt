@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.adlunam.databinding.FragmentImageBinding
 
+// https://astropical.space/quiz.php?category=astronomy+1
 
 class ImagesFragment : Fragment() {
 
