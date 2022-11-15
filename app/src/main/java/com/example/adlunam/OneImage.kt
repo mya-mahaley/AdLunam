@@ -19,7 +19,7 @@ class OneImage: AppCompatActivity() {
         setContentView(oneImageBinding.root)
 
         // Get the support ActionBar corresponding to this toolbar
-        setSupportActionBar(oneImageBinding.toolbar)
+        //setSupportActionBar(oneImageBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //val actionBar = supportActionBar
