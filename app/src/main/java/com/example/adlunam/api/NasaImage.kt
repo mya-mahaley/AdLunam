@@ -14,7 +14,9 @@ data class NasaImage (
     @SerializedName("description")
     val description: SpannableString,
     @SerializedName("nasa_id")
-    val nasaID: String
+    val nasaID: String,
+    @SerializedName("href")
+    val url: String
 ) {
     companion object {
         // NB: This only highlights the first match in a string
