@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "107294840108",
+    "project_id": "adlunam-c6b2b",
+    "storage_bucket": "adlunam-c6b2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107294840108:android:e61b7dd80830d3b1530889",
+        "android_client_info": {
+          "package_name": "com.example.adlunam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107294840108-uf0qk4i4rd51cilatp9nhld5hhmjnrml.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.adlunam",
+            "certificate_hash": "91534b7dd2b9ceae6c8486a94eaef8b4722d870a"
+          }
+        },
+        {
+          "client_id": "107294840108-g95c9paukrlclkjn3br8cghsntaqu4nt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIQrrzzNG7heFIAztgM3OH1CIlErzD95Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107294840108-g95c9paukrlclkjn3br8cghsntaqu4nt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
