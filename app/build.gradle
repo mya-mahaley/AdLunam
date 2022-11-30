@@ -68,4 +68,7 @@ dependencies {
 
     //firebase
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
+
+    //location
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 }

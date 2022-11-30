@@ -1,14 +1,17 @@
 package com.example.adlunam
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -16,7 +19,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import com.example.adlunam.databinding.ActivityMainBinding
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
-import com.google.android.material.navigation.NavigationView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 // https://stackoverflow.com/questions/55990820/how-to-use-navigation-drawer-and-bottom-navigation-simultaneously-navigation-a
 
@@ -33,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.updateUser()
         }
 
-
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,12 +46,12 @@ class MainActivity : AppCompatActivity() {
 
         // Bottom Nav View
         val navView: BottomNavigationView = binding.navView
+        val drawer: DrawerLayout = binding.drawerLayout
         navController = findNavController(R.id.nav_host_fragment_activity_main)
-
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration.Builder(R.id.navigation_home,
-            R.id.navigation_images, R.id.navigation_trivia)
+            R.id.navigation_images, R.id.navigation_trivia, R.id.navigation_profile)
             .setOpenableLayout(binding.drawerLayout)
             .build()
 
@@ -55,6 +59,20 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         visibilityNavElements(navController)
 
+
+        binding.sideNavView.setNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.profile -> {
+                    Log.d("XXX", "YAYYYYY")
+                    navController.navigate(R.id.navigation_profile)
+                }
+            }
+            Log.d("XXX", "${it.itemId}")
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+
+        requestPermission()
         AuthInit(viewModel, signInLauncher)
     }
 
@@ -65,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         //Modify this according to your need
         //If you want you can implement logic to deselect(styling) the bottom navigation menu item when drawer item selected using listener
 
+        //may need to changed
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.profile -> hideBothNavigation()
@@ -73,7 +92,6 @@ class MainActivity : AppCompatActivity() {
                 else -> showBothNavigation()
             }
         }
-
     }
 
     private fun hideBothNavigation() { //Hide both drawer and bottom navigation bar
@@ -114,6 +132,32 @@ class MainActivity : AppCompatActivity() {
             else -> {
                 super.onBackPressed() //If drawer is already in closed condition then go back
             }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun requestPermission() {
+        val locationPermissionRequest = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                    //locationPermissionGranted = true
+                } else -> {
+                Toast.makeText(this,
+                    "Unable to show location - permission required",
+                    Toast.LENGTH_LONG).show()
+            }
+            }
+        }
+        locationPermissionRequest.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION))
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED){
+            Log.d("PERMISSION", "GRANTED")
+            //homeViewModel.setLocationAvailable(true)
+        } else {
+            Log.d("PERMISSION", "GRANTED")
         }
     }
 
