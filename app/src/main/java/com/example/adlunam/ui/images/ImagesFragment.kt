@@ -48,7 +48,7 @@ class ImagesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView: RecyclerView = binding.recyclerView
 
-        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        val layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         recyclerView.layoutManager = layoutManager
 
         val adapter = ImageAdapter(viewModel)

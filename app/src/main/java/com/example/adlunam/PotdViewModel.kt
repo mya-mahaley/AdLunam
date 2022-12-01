@@ -1,4 +1,4 @@
-package com.example.adlunam.ui.home
+package com.example.adlunam
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,7 @@ import com.example.adlunam.api.PictureOfTheDayRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class PotdViewModel : ViewModel() {
     var fetchDone : MutableLiveData<Boolean> = MutableLiveData(false)
     private val pictureApi = PictureOfTheDayApi.create()
     private val pictureRepository = PictureOfTheDayRepository(pictureApi)

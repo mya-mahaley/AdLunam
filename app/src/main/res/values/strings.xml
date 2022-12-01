@@ -10,5 +10,21 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
+    <string name="model_url">https://arvr.google.com/scene-viewer/1.0?file=https://test-aorist-bucket.s3.amazonaws.com/models/artwork/187.1.glb</string>
+    <string name="scene_viewer_package">com.google.android.googlequicksearchbox</string>
+
+    <!-- Model Viewer Locations-->
+    <string name="solar_system_model_location">file:///android_asset/solarSystemModel.html</string>
+    <string name="mercury_model_location">file:///android_asset/mercuryModel.html</string>
+    <string name="venus_model_location">file:///android_asset/venusModel.html</string>
+    <string name="earth_model_location">file:///android_asset/earthModel.html</string>
+    <string name="mars_model_location">file:///android_asset/marsModel.html</string>
+    <string name="jupiter_model_location">file:///android_asset/jupiterModel.html</string>
+    <string name="saturn_model_location">file:///android_asset/saturnModel.html</string>
+    <string name="uranus_model_location">file:///android_asset/uranusModel.html</string>
+    <string name="neptune_model_location">file:///android_asset/neptuneModel.html</string>
+    <string name="moon_model_location">file:///android_asset/moonModel.html</string>
+
+
 
 </resources>

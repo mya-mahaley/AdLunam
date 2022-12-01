@@ -20,7 +20,7 @@ class ImagesViewModel : ViewModel() {
 
     private val nasaImages = MutableLiveData<List<NasaImage>>()
     private val searchTerm = MutableLiveData<String>().apply {
-        value = "moon"
+        value = "full"
     }
 
     init{
@@ -52,8 +52,8 @@ class ImagesViewModel : ViewModel() {
     companion object {
         fun doOneImage(context: Context, imageData: NasaImage) {
             var intent = Intent(context, OneImage::class.java).apply{
-                putExtra(ImageAdapter.titleKey, imageData.title)
-                putExtra(ImageAdapter.descriptionKey, imageData.description)
+                putExtra(ImageAdapter.titleKey, imageData.title.toString())
+                putExtra(ImageAdapter.descriptionKey, imageData.description.toString())
                 putExtra(ImageAdapter.imageURLKey, imageData.url)
             }
             context.startActivity(intent)

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
+    <model-viewer
+            id="reveal"
+            loading="eager"
+            camera-controls="true"
+            interaction-prompt="none"
+            auto-rotate="true"
+            rotation-per-second="0.3rad"
+            src="https://adlunam-models.s3.us-east-2.amazonaws.com/earth.glb "
+            alt="Solar System"
+            ar-status="not-presenting"
+            style="width: 100%; height: 100%; position: absolute; left: 0px; top: 0px; z-index: 0; display: block;">
+    </model-viewer>
+    </body>
+</html>
