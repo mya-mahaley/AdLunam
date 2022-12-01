@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/stars_background"
     android:paddingBottom="48dp"
     tools:context=".ui.profile.ProfileFragment">
 
@@ -37,9 +37,13 @@
                 android:text="username:"
                 android:fontFamily="@font/fredoka"
                 android:textAlignment="textEnd"
-                android:textColor="@color/material_dynamic_secondary70"
+                android:textColor="@color/white"
                 android:textSize="35sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="35sp"
+                app:autoSizeMinTextSize="10sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,7 +51,7 @@
                 android:textAlignment="textEnd"
                 android:id="@+id/current_phase"
                 android:fontFamily="@font/fredoka"
-                android:textColor="@color/material_dynamic_secondary70"
+                android:textColor="@color/white"
                 android:textSize="15sp" />
             <TextView
                 android:layout_width="match_parent"
@@ -56,7 +60,7 @@
                 android:textAlignment="textEnd"
                 android:id="@+id/long_lat"
                 android:fontFamily="@font/fredoka"
-                android:textColor="@color/material_dynamic_secondary70"
+                android:textColor="@color/white"
                 android:textSize="15sp" />
         </LinearLayout>
         <ImageView
@@ -96,6 +100,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/display_name_button"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp"
             android:fontFamily="@font/fredoka"
             android:text="update"
             />
@@ -108,6 +114,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/logout"
         android:text="logout"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp"
         android:fontFamily="@font/fredoka"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/change_layout"
