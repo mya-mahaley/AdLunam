@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import com.example.adlunam.databinding.FragmentTriviaBinding
 import androidx.fragment.app.Fragment
@@ -130,16 +131,20 @@ class TriviaFragment : Fragment() {
     }
 
     private fun enableAnswers(correct: Int, explanation: String, question: String) {
+        val shake = AnimationUtils.loadAnimation(context, R.anim.shake_animation)
+        val spin = AnimationUtils.loadAnimation(context, R.anim.rotate_animation)
         binding.answer0.setOnClickListener {
             binding.question.text = explanation
             when (correct) {
                 0 -> {
                     mainViewModel.correctAnswer()
                     binding.questionCard.setCardBackgroundColor(correctColor)
+                    binding.questionCard.startAnimation(spin)
                 }
                 else -> {
                     mainViewModel.incorrectAnswer()
                     binding.questionCard.setCardBackgroundColor(incorrectColor)
+                    binding.questionCard.startAnimation(shake);
                 }
             }
             showAnswer(correct, explanation, question)
@@ -152,10 +157,12 @@ class TriviaFragment : Fragment() {
                 1 -> {
                     mainViewModel.correctAnswer()
                     binding.questionCard.setCardBackgroundColor(correctColor)
+                    binding.questionCard.startAnimation(spin)
                 }
                 else -> {
                     mainViewModel.incorrectAnswer()
                     binding.questionCard.setCardBackgroundColor(incorrectColor)
+                    binding.questionCard.startAnimation(shake);
                 }
             }
 
@@ -169,10 +176,12 @@ class TriviaFragment : Fragment() {
                 2 -> {
                     mainViewModel.correctAnswer()
                     binding.questionCard.setCardBackgroundColor(correctColor)
+                    binding.questionCard.startAnimation(spin)
                 }
                 else -> {
                     mainViewModel.incorrectAnswer()
                     binding.questionCard.setCardBackgroundColor(incorrectColor)
+                    binding.questionCard.startAnimation(shake);
                 }
             }
             showAnswer(correct,explanation, question)

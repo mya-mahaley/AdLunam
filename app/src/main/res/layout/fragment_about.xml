@@ -5,9 +5,125 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/stars_background"
     android:paddingBottom="48dp"
     tools:context=".ui.profile.ProfileFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_margin="25dp"
+        android:layout_height="wrap_content"
+        android:text="About the Team"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:gravity="center"
+        android:fontFamily="@font/fredoka"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:id="@+id/developers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:text="Developers"
+            android:textColor="@color/purple_200"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:fontFamily="@font/fredoka"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_margin="15dp"
+                    android:layout_gravity="center"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="10dp"
+                    android:src="@drawable/christian_headshot"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textSize="15sp"
+                    android:text="Christian Pichardo"
+                    android:textColor="@color/purple_200"
+                    android:fontFamily="@font/fredoka"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/christian_description"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:text="Description"
+                    android:fontFamily="@font/fredoka"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_margin="15dp"
+                    android:layout_gravity="center"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="10dp"
+                    android:src="@drawable/mya_headshot"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textSize="15sp"
+                    android:text="Mya Mahaley"
+                    android:textColor="@color/purple_200"
+                    android:fontFamily="@font/fredoka"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/mya_description"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="10sp"
+                    android:gravity="center"
+                    android:fontFamily="@font/fredoka"
+                    android:text="Description"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding : ActivityMainBinding
 
+
     private val signInLauncher =
         registerForActivityResult(FirebaseAuthUIActivityResultContract()) {
             viewModel.updateUser()
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
+        AuthInit(viewModel, signInLauncher)
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -79,9 +81,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         binding.sideNavView.setNavigationItemSelectedListener(this)
 
-
         requestPermission()
-        AuthInit(viewModel, signInLauncher)
 
         viewModel.observerSignedIn().observe(this){
             if(!it){

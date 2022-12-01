@@ -46,8 +46,20 @@ class AboutFragment : Fragment() {
         _binding = FragmentAboutBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.christianDescription.text = " I am a Computer Science Senior attending the " +
+            "University of Texas at Austin. I am currently working at Juni Learning as a Part-Time " +
+            "Computer Science Instructor. My favorite part of this project was learning how to use " +
+            "the model-viewer to display 3D models of different planets!"
+
+        binding.myaDescription.text = " Hi! I am  a Senior at the University of Texas at " +
+                "Austin studying Computer Science. I currently have a return offer to work at " +
+                "Google as a Software Engineer. My favorite part of this project was developing " +
+                "the trivia game and making a worth while experience for the user!"
+
         return root
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
