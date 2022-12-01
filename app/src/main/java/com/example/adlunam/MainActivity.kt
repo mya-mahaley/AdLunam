@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -20,12 +21,13 @@ import androidx.navigation.ui.*
 import com.example.adlunam.databinding.ActivityMainBinding
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 
 
 // https://stackoverflow.com/questions/55990820/how-to-use-navigation-drawer-and-bottom-navigation-simultaneously-navigation-a
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
@@ -47,15 +49,16 @@ class MainActivity : AppCompatActivity() {
         // Bottom Nav View
         val navView: BottomNavigationView = binding.navView
         val drawer: DrawerLayout = binding.drawerLayout
+
         navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration.Builder(R.id.navigation_home,
-            R.id.navigation_images, R.id.navigation_trivia, R.id.navigation_profile)
+            R.id.navigation_images, R.id.navigation_trivia)
             .setOpenableLayout(binding.drawerLayout)
             .build()
 
-        //setSupportActionBar()
+        setSupportActionBar(binding.mainToolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
         visibilityNavElements(navController)
 
@@ -66,14 +69,16 @@ class MainActivity : AppCompatActivity() {
         binding.sideNavView.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.profile -> {
-                    Log.d("XXX", "YAYYYYY")
                     navController.navigate(R.id.navigation_profile)
                 }
             }
             Log.d("XXX", "${it.itemId}")
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            hideBothNavigation()
             true
         }
+
+        binding.sideNavView.setNavigationItemSelectedListener(this)
+
 
         requestPermission()
         AuthInit(viewModel, signInLauncher)
@@ -95,9 +100,8 @@ class MainActivity : AppCompatActivity() {
         //may need to changed
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.profile -> hideBothNavigation()
-                R.id.friends -> hideBottomNavigation()
-                R.id.about_us -> hideBottomNavigation()
+                R.id.profile -> hideBottomNavigation()
+                R.id.about -> hideBottomNavigation()
                 else -> showBothNavigation()
             }
         }
@@ -125,7 +129,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavControl() {
-        binding.sideNavView.setupWithNavController(navController) //Setup Drawer navigation with navController
+        //binding.sideNavView.setupWithNavController(navController) //Setup Drawer navigation with navController
         binding.navView.setupWithNavController(navController) //Setup Bottom navigation with navController
     }
 
@@ -168,6 +172,21 @@ class MainActivity : AppCompatActivity() {
         } else {
             Log.d("PERMISSION", "GRANTED")
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.profile -> {
+                navController.navigate(R.id.navigation_profile)
+                hideBothNavigation()
+            }
+            R.id.about -> {
+                navController.navigate(R.id.navigation_about)
+                hideBothNavigation()
+            }
+        }
+        Log.d("XXX", "${item.itemId}")
+        return true
     }
 
 }
