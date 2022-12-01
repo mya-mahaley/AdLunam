@@ -100,6 +100,7 @@ class TriviaFragment : Fragment() {
 
     private fun pickQuestion() {
         explanationVisible = false
+        answerClicked = false
         val questionObject = questionList[random.nextInt(0, questionList.size)]
         val question = questionObject.question
         val explanation = questionObject.explanation
@@ -134,6 +135,7 @@ class TriviaFragment : Fragment() {
         val shake = AnimationUtils.loadAnimation(context, R.anim.shake_animation)
         val spin = AnimationUtils.loadAnimation(context, R.anim.rotate_animation)
         binding.answer0.setOnClickListener {
+            answerClicked = true
             binding.question.text = explanation
             when (correct) {
                 0 -> {
@@ -152,6 +154,7 @@ class TriviaFragment : Fragment() {
         }
 
         binding.answer1.setOnClickListener {
+            answerClicked = true
             binding.question.text = explanation
             when (correct) {
                 1 -> {
@@ -171,6 +174,7 @@ class TriviaFragment : Fragment() {
         }
 
         binding.answer2.setOnClickListener {
+            answerClicked = true
             binding.question.text = explanation
             when (correct) {
                 2 -> {
@@ -192,12 +196,14 @@ class TriviaFragment : Fragment() {
     private fun showAnswer(correct: Int, explanation: String, question: String) {
         explanationVisible = true
         binding.questionCard.setOnClickListener{
-            if(explanationVisible){
-                explanationVisible = false
-                binding.question.text = question
-            } else {
-                explanationVisible = true
-                binding.question.text = explanation
+            if(answerClicked){
+                if(explanationVisible){
+                    explanationVisible = false
+                    binding.question.text = question
+                } else {
+                    explanationVisible = true
+                    binding.question.text = explanation
+                }
             }
         }
         when (correct) {
