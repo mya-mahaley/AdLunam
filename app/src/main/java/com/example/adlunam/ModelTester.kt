@@ -20,7 +20,7 @@ class ModelTester :AppCompatActivity(){
         setContentView(modelViewBinding.root)
 
         // Get the support ActionBar corresponding to this toolbar
-        //setSupportActionBar(oneImageBinding.toolbar)
+        setSupportActionBar(modelViewBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val activityThatCalled = intent

@@ -31,12 +31,14 @@
 
             <TextView
                 android:id="@+id/username"
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="username:"
+                android:fontFamily="@font/fredoka"
                 android:textAlignment="textEnd"
                 android:textColor="@color/material_dynamic_secondary70"
-                android:textSize="25sp"
+                android:textSize="35sp"
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
@@ -44,6 +46,7 @@
                 android:text="Current Phase: Full Moon"
                 android:textAlignment="textEnd"
                 android:id="@+id/current_phase"
+                android:fontFamily="@font/fredoka"
                 android:textColor="@color/material_dynamic_secondary70"
                 android:textSize="15sp" />
             <TextView
@@ -52,6 +55,7 @@
                 android:text=" 0,0"
                 android:textAlignment="textEnd"
                 android:id="@+id/long_lat"
+                android:fontFamily="@font/fredoka"
                 android:textColor="@color/material_dynamic_secondary70"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -82,7 +86,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/moon_layout"
             android:textColorHint="@color/white"
-            android:hint="Display name"
+            android:hint="Display Name"
+            android:fontFamily="@font/fredoka"
             android:textColor="@color/white"
             android:backgroundTint="@color/white"
             android:id="@+id/display_name_et"/>
@@ -91,6 +96,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/display_name_button"
+            android:fontFamily="@font/fredoka"
             android:text="update"
             />
     </LinearLayout>
@@ -102,6 +108,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/logout"
         android:text="logout"
+        android:fontFamily="@font/fredoka"
+        android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/change_layout"
         />
 

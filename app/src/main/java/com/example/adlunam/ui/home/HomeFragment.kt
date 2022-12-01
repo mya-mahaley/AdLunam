@@ -14,6 +14,7 @@ import com.example.adlunam.databinding.FragmentHomeBinding
 import com.google.android.gms.location.*
 import android.view.animation.AnimationUtils
 import android.widget.PopupMenu
+import androidx.fragment.app.activityViewModels
 import com.example.adlunam.*
 
 
@@ -21,6 +22,7 @@ import com.example.adlunam.*
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
@@ -34,6 +36,9 @@ class HomeFragment : Fragment() {
         //binding.apotdHeader.visibility = View.INVISIBLE
         binding.welcomeText.animation = AnimationUtils.loadAnimation(context, androidx.appcompat.R.anim.abc_fade_in)
 
+        mainViewModel.observeDisplayName().observe(viewLifecycleOwner){
+            binding.displayName.text = it
+        }
         binding.planetModelsButon.setOnClickListener {
             var popupMenu = PopupMenu(requireContext(), it)
             popupMenu.menuInflater.inflate(R.menu.planet_options_menu, popupMenu.menu)
