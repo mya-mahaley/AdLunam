@@ -6,11 +6,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/profile"
-            android:icon="@drawable/ic_notifications_black_24dp"
+            android:icon="@drawable/fui_ic_anonymous_white_24dp"
             android:title="Profile" />
         <item
             android:id="@+id/about"
-            android:icon="@drawable/ic_notifications_black_24dp"
-            android:title="About Us" />
+            android:icon="@android:drawable/ic_dialog_info"
+            android:title="About Us"
+            />
     </group>
 </menu>

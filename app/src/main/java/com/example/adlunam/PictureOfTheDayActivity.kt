@@ -17,6 +17,7 @@ class PictureOfTheDayActivity: AppCompatActivity() {
 
         // Get the support ActionBar corresponding to this toolbar
         //setSupportActionBar(oneImageBinding.toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         potdViewModel.observePicture().observe(this) { picture ->
             if(picture != null){
