@@ -60,6 +60,9 @@ class MainActivity : AppCompatActivity() {
         visibilityNavElements(navController)
 
 
+
+        //do i need this????
+        //maybe to deselect buttotns at botton
         binding.sideNavView.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.profile -> {
@@ -74,6 +77,12 @@ class MainActivity : AppCompatActivity() {
 
         requestPermission()
         AuthInit(viewModel, signInLauncher)
+
+        viewModel.observerSignedIn().observe(this){
+            if(!it){
+                AuthInit(viewModel, signInLauncher)
+            }
+        }
     }
 
 

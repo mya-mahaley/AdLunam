@@ -31,12 +31,12 @@
         <item name="windowNoTitle">true</item>
         <item name="android:textColorHint">@color/purple_200</item>
         <item name="android:hint">@color/white</item>
-
     </style>
 
     <style name="FirebaseUI.TextInputLayout" parent="Widget.Design.TextInputLayout">
         <item name="android:textColorHint">@color/white</item>
         <item name="android:background">@null</item>
+        <item name="android:imeOptions">actionDone</item>
     </style>
 
     <style name="FirebaseUI.Text">

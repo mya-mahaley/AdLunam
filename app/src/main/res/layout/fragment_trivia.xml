@@ -161,19 +161,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0%"
+                    android:text="00%"
                     android:textColor="@color/white"
-                    android:textSize="40sp"
+                    android:textSize="35sp"
                     android:textStyle="bold"
                     android:layout_gravity="center"
                     android:id="@+id/cur_score"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/overall_card"
+            android:id="@+id/reset_score"
             android:layout_marginStart="10dp"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:cardCornerRadius="8dp"
             app:cardMaxElevation="2dp"
             app:cardElevation="1dp"
@@ -183,6 +183,7 @@
             app:strokeColor="@color/white"
             app:cardBackgroundColor="#4D3DD5"
             >
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -193,20 +194,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="RESET SCORE"
                     android:textColor="@color/white"
+                    android:textSize="25sp"
+                    android:textAlignment="center"
                     android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:text="Overall: "/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0%"
-                    android:textColor="@color/white"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:id="@+id/overall_score"/>
+                    android:layout_gravity="center"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

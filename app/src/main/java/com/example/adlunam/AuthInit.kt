@@ -40,9 +40,12 @@ class AuthInit(viewModel: MainViewModel, signInLauncher: ActivityResultLauncher<
                 .build()
             signInLauncher.launch(intent)
 
+            viewModel.setSignedIn(true)
+
         } else {
             Log.d(TAG, "XXX user ${user.displayName} email ${user.email}")
             viewModel.updateUser()
+            viewModel.setSignedIn(true)
         }
     }
 }

@@ -11,6 +11,8 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+//https://stackoverflow.com/questions/50047863/fusedlocationproviderclient-lastlocation-addonsuccesslistener-always-null
+
 class ProfileViewModel : ViewModel() {
     var fetchDone : MutableLiveData<Boolean> = MutableLiveData(false)
     private val weatherApi = WeatherApi.create()
@@ -22,10 +24,6 @@ class ProfileViewModel : ViewModel() {
         value = "moon"
     }
 
-    private var displayName = MutableLiveData("Uninitialized")
-    private var email = MutableLiveData("Uninitialized")
-    private var uid = MutableLiveData("Uninitialized")
-
     fun refreshMoon(long: Double, lat: Double) {
         // XXX Write me.  This is where the network request is initiated.
         fetchDone.value = false
@@ -36,39 +34,8 @@ class ProfileViewModel : ViewModel() {
         }
     }
 
-    fun observeFetchDone(): LiveData<Boolean> {
-        return fetchDone
-    }
 
     fun observeWeather(): LiveData<Weather> {
         return weather
-    }
-
-    private fun userLogout() {
-        displayName.postValue("No user")
-        email.postValue("No email, no active user")
-        uid.postValue("No uid, no active user")
-    }
-
-    fun updateUser() {
-        // XXX Write me. Update user data in view model
-        val user = FirebaseAuth.getInstance().currentUser
-        email.postValue(user.email)
-        uid.postValue(user.uid)
-        displayName.postValue(user.displayName)
-    }
-
-    fun observeDisplayName() : LiveData<String> {
-        return displayName
-    }
-    fun observeEmail() : LiveData<String> {
-        return email
-    }
-    fun observeUid() : LiveData<String> {
-        return uid
-    }
-    fun signOut() {
-        FirebaseAuth.getInstance().signOut()
-        userLogout()
     }
 }

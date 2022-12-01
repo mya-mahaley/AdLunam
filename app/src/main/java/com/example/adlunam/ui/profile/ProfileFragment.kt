@@ -18,18 +18,25 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.example.adlunam.AuthInit
+import com.example.adlunam.MainViewModel
 import com.example.adlunam.databinding.FragmentProfileBinding
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import kotlin.getValue
 
 
 //https://www.programmableweb.com/api/mooncalc-rest-api
+//https://stackoverflow.com/questions/50047863/fusedlocationproviderclient-lastlocation-addonsuccesslistener-always-null
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private val profileViewModel: ProfileViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var locationManager: LocationManager
     private lateinit var client: FusedLocationProviderClient
     private var latitude = 0.0
@@ -47,13 +54,28 @@ class ProfileFragment : Fragment() {
         val root: View = binding.root
         client = LocationServices.getFusedLocationProviderClient(requireContext())
 
-        /*if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
             == PackageManager.PERMISSION_GRANTED){
             getCurrentLocation()
-        }*/
+        }
 
-        getCurrentLocation()
+        binding.username.text = FirebaseAuth.getInstance().currentUser.displayName
+        binding.displayNameButton.setOnClickListener {
+            val displayName = binding.displayNameEt.text.toString()
+            if(displayName != null && displayName.isNotEmpty()){
+                AuthInit.setDisplayName(displayName, mainViewModel)
+                /*val user = FirebaseAuth.getInstance().currentUser
+                val profileUpdates = UserProfileChangeRequest.Builder().setDisplayName(displayName)
+                user.updateProfile(profileUpdates.build())*/
+                binding.username.text = "$displayName:"
+                binding.displayNameEt.text.clear()
+            }
+        }
+
+        binding.logout.setOnClickListener {
+            mainViewModel.signOut()
+        }
 
         profileViewModel.observeWeather().observe(viewLifecycleOwner) {
             if(it != null){
@@ -103,9 +125,6 @@ class ProfileFragment : Fragment() {
         // Check condition
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
             || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            // When location service is enabled
-            // Get last location
-
             client.lastLocation.addOnCompleteListener { task ->
                 // Initialize location
                 val location: Location? = task.result
@@ -115,14 +134,11 @@ class ProfileFragment : Fragment() {
                     latitude = location.latitude
                     profileViewModel.refreshMoon(longitude, latitude)
                 } else {
-                    // When location result is null
-                    // initialize location request
                     val locationRequest: LocationRequest = LocationRequest()
                         .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                         .setInterval(1)
                         .setFastestInterval(1)
                         .setNumUpdates(1)
-                    // Initialize location call back
                     val locationCallback: LocationCallback = object : LocationCallback() {
                         override fun onLocationResult(locationResult: LocationResult) {
                             val newLocation: Location = locationResult.lastLocation
@@ -136,42 +152,6 @@ class ProfileFragment : Fragment() {
                     client.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
                 }
             }
-
-            /*.lastLocation.addOnCompleteListener { task ->
-
-            }
-            client.lastLocation.addOnCompleteListener(
-                OnCompleteListener<Location> { task ->
-                    // Initialize location
-                    val location: Location? = task.result
-                    // Check condition
-                    if (location != null) {
-                        longitude = location.longitude
-                        latitude = location.latitude
-                        profileViewModel.refreshMoon(longitude, latitude)
-                    } else {
-                        // When location result is null
-                        // initialize location request
-                        val locationRequest: LocationRequest = LocationRequest()
-                            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                            .setInterval(1)
-                            .setFastestInterval(1)
-                            .setNumUpdates(1)
-                        // Initialize location call back
-                        val locationCallback: LocationCallback = object : LocationCallback() {
-                            override fun onLocationResult(locationResult: LocationResult) {
-                                val newLocation: Location = locationResult.lastLocation
-                                longitude = newLocation.longitude
-                                latitude = newLocation.latitude
-                                profileViewModel.refreshMoon(longitude, latitude)
-                            }
-                        }
-
-                        // Request location updates
-                        client.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
-                    }
-                })*/
-
         } else {
             // When location service is not enabled
             // open location setting

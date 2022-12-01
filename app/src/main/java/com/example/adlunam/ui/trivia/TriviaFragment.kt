@@ -9,8 +9,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.adlunam.databinding.FragmentTriviaBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.example.adlunam.MainViewModel
 import com.example.adlunam.R
+import com.example.adlunam.ui.profile.ProfileViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -21,9 +25,8 @@ class TriviaFragment : Fragment() {
     private val correctColor = Color.parseColor("#FF006A36")
     private val incorrectColor = Color.parseColor("#FF6A0000")
     private val cardColor = Color.parseColor("#2E0E9D")
-    private var curCorrect = 0.0
-    private var curTotal = 0.0
-
+    private var explanationVisible = false
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     private var _binding: FragmentTriviaBinding? = null
     private val questionList : MutableList<TriviaQuestion> = ArrayList()
@@ -48,6 +51,21 @@ class TriviaFragment : Fragment() {
 
         binding.newQuestion.setOnClickListener {
             pickQuestion()
+        }
+
+        binding.resetScore.setOnClickListener {
+            mainViewModel.resetScore()
+        }
+
+        mainViewModel.observeTriviaScore().observe(viewLifecycleOwner){
+            val correct = it.first
+            val total = it.second
+            if (correct == 0.0 && total == 0.0){
+                binding.curScore.text = "0%"
+            } else {
+                val curScore = (correct / total * 100).roundToInt()
+                binding.curScore.text = "$curScore%"
+            }
         }
 
         return root
@@ -80,6 +98,7 @@ class TriviaFragment : Fragment() {
     }
 
     private fun pickQuestion() {
+        explanationVisible = false
         val questionObject = questionList[random.nextInt(0, questionList.size)]
         val question = questionObject.question
         val explanation = questionObject.explanation
@@ -105,62 +124,73 @@ class TriviaFragment : Fragment() {
             correct = 2
         }
 
-        enableAnswers(correct, explanation)
+        enableAnswers(correct, explanation, question)
 
 
     }
 
-    private fun enableAnswers(correct: Int, explanation: String) {
+    private fun enableAnswers(correct: Int, explanation: String, question: String) {
         binding.answer0.setOnClickListener {
-            curTotal++
             binding.question.text = explanation
             when (correct) {
                 0 -> {
-                    curCorrect++
+                    mainViewModel.correctAnswer()
                     binding.questionCard.setCardBackgroundColor(correctColor)
                 }
-                else -> binding.questionCard.setCardBackgroundColor(incorrectColor)
+                else -> {
+                    mainViewModel.incorrectAnswer()
+                    binding.questionCard.setCardBackgroundColor(incorrectColor)
+                }
             }
-            val curScore = (curCorrect/curTotal * 100).roundToInt()
-            binding.curScore.text = "$curScore%"
-            showAnswer(correct)
+            showAnswer(correct, explanation, question)
             disableAnswers()
         }
 
         binding.answer1.setOnClickListener {
-            curTotal++
             binding.question.text = explanation
             when (correct) {
                 1 -> {
-                    curCorrect++
+                    mainViewModel.correctAnswer()
                     binding.questionCard.setCardBackgroundColor(correctColor)
                 }
-                else -> binding.questionCard.setCardBackgroundColor(incorrectColor)
+                else -> {
+                    mainViewModel.incorrectAnswer()
+                    binding.questionCard.setCardBackgroundColor(incorrectColor)
+                }
             }
-            val curScore = (curCorrect/curTotal * 100).roundToInt()
-            binding.curScore.text = "$curScore%"
-            showAnswer(correct)
+
+            showAnswer(correct, explanation, question)
             disableAnswers()
         }
 
         binding.answer2.setOnClickListener {
-            curTotal++
             binding.question.text = explanation
             when (correct) {
                 2 -> {
-                    curCorrect++
+                    mainViewModel.correctAnswer()
                     binding.questionCard.setCardBackgroundColor(correctColor)
                 }
-                else -> binding.questionCard.setCardBackgroundColor(incorrectColor)
+                else -> {
+                    mainViewModel.incorrectAnswer()
+                    binding.questionCard.setCardBackgroundColor(incorrectColor)
+                }
             }
-            val curScore = (curCorrect/curTotal * 100).roundToInt()
-            binding.curScore.text = "$curScore%"
-            showAnswer(correct)
+            showAnswer(correct,explanation, question)
             disableAnswers()
         }
     }
 
-    private fun showAnswer(correct: Int) {
+    private fun showAnswer(correct: Int, explanation: String, question: String) {
+        explanationVisible = true
+        binding.questionCard.setOnClickListener{
+            if(explanationVisible){
+                explanationVisible = false
+                binding.question.text = question
+            } else {
+                explanationVisible = true
+                binding.question.text = explanation
+            }
+        }
         when (correct) {
             0 -> {
                 binding.answer0.setStrokeColorResource(R.color.green)
