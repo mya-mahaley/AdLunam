@@ -2,22 +2,21 @@ package com.example.adlunam.ui.images
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.getSystemService
+import android.widget.TextView.OnEditorActionListener
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.adlunam.databinding.FragmentImageBinding
+
 
 // https://astropical.space/quiz.php?category=astronomy+1
 
@@ -70,6 +69,25 @@ class ImagesFragment : Fragment() {
             }
             viewModel.setSearchTerm(text)
         }
+
+        binding.searchBar.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                hideKeyboard()
+                return@OnKeyListener true
+            }
+            false
+        })
+
+        /*binding.searchBar.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                Log.d("XXX", "IME ACTION SEARCH")
+                val text = binding?.searchBar?.text.toString()
+                viewModel.setSearchTerm(text)
+                hideKeyboard()
+                return@OnEditorActionListener true
+            }
+            false
+        })*/
     }
 
     private fun hideKeyboard() {

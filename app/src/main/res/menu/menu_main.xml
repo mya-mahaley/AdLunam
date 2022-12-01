@@ -8,12 +8,7 @@
         android:title="Profile"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_friends"
-        android:orderInCategory="100"
-        android:title="Friends"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/about_us"
+        android:id="@+id/action_about"
         android:orderInCategory="100"
         android:title="About Us"
         app:showAsAction="never" />

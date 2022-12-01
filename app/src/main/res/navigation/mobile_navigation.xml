@@ -22,4 +22,14 @@
         android:name="com.example.adlunam.ui.trivia.TriviaFragment"
         android:label="@string/title_trivia"
         tools:layout="@layout/fragment_trivia" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.adlunam.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/navigation_about"
+        android:name="com.example.adlunam.ui.about.AboutFragment"
+        android:label="@string/title_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

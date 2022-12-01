@@ -1,23 +1,28 @@
 package com.example.adlunam.ui.home
 
+import com.example.adlunam.R
 import android.content.Intent
+import android.os.Build
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import com.example.adlunam.databinding.FragmentHomeBinding
+import com.google.android.gms.location.*
 import android.view.animation.AnimationUtils
 import android.widget.PopupMenu
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.example.adlunam.*
-import com.example.adlunam.databinding.FragmentHomeBinding
+
 
 //https://www.programmableweb.com/api/mooncalc-rest-api
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -108,7 +113,6 @@ class HomeFragment : Fragment() {
                 loadWithOverviewMode = true
             }
         }
-
         return root
     }
 
@@ -117,4 +121,6 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
