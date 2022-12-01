@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/mercury_model"
+        android:title="View Mercury"/>
+
+    <item android:id="@+id/venus_model"
+        android:title="View Venus"/>
+
+    <item android:id="@+id/earth_model"
+        android:title="View Earth"/>
+
+    <item android:id="@+id/mars_model"
+        android:title="View Mars"/>
+
+    <item android:id="@+id/jupiter_model"
+        android:title="View Jupiter"/>
+
+    <item android:id="@+id/saturn_model"
+        android:title="View Saturn"/>
+
+    <item android:id="@+id/uranus_model"
+        android:title="View Uranus"/>
+
+    <item android:id="@+id/neptune_model"
+        android:title="View Neptune"/>
+
+    <item android:id="@+id/moon_model"
+        android:title="View Moon"/>
+
+</menu>
