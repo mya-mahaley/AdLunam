@@ -52,9 +52,9 @@ class AboutFragment : Fragment() {
             "the model-viewer to display 3D models of different planets!"
 
         binding.myaDescription.text = " Hi! I am  a Senior at the University of Texas at " +
-                "Austin studying Computer Science. I currently have a return offer to work at " +
-                "Google as a Software Engineer. My favorite part of this project was developing " +
-                "the trivia game and making a worth while experience for the user!"
+                "Austin studying Computer Science. I have a passion for Mobile and " +
+                "Frontend development. My favorite part of this project was developing " +
+                "the trivia game and making a worthwhile experience for the user!"
 
         return root
     }
